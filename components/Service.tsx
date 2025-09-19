@@ -14,12 +14,12 @@ const Service = () => {
           <div className="flex flex-col justify-center gap-2 sm:flex-row md:gap-6">
             <Cards
               title="Resume Building"
-              icon={<Building2 />}
+              icon={<Building2 className="text-pink-600"/>}
               description="Effortlessly create a professional and polished resume in minutes with our intuitive Resume Generation tool. Simply input your information, and our platform will guide you through the process with AI-powered suggestions for skills and job descriptions."
             />
             <Cards
               title="Resume Analysis"
-              icon={<ChartNoAxesCombined />}
+              icon={<ChartNoAxesCombined className="text-rose-600"/>}
               description="Get detailed insights and feedback on your existing resume with our AI-powered Resume Analysis tool. Upload your resume, and our platform will provide personalized suggestions for improvement, helping you stand out to potential employers."
             />
           </div>
