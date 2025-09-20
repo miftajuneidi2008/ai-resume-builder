@@ -2,23 +2,26 @@
 import React, { useState } from "react";
 import PersonalInfo from "./forms/PersonalInfo";
 import { z } from "zod";
-import { PersonalInfoSchema, SummarySchema } from "@/schema/schema";
+import { ExperienceSchema, PersonalInfoSchema, SummarySchema } from "@/schema/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { ChevronLeft, ChevronRight, Send } from "lucide-react";
 import { ProgressBar } from "./ProgressBar";
 import Summary from "./forms/Summary";
+import Experience from "./forms/Experience";
 
 const fullSchema = z.object({
   personalInfo: PersonalInfoSchema,
-  summaryInfo: SummarySchema
+  summaryInfo: SummarySchema,
+  experienceInfo: z.array(ExperienceSchema).default([]),
 });
 export type fullSchematype = z.infer<typeof fullSchema>;
 const stepSchema = [z.object({ personalInfo: PersonalInfoSchema }),
        z.object({ summaryInfo: SummarySchema }),
+       z.object({ experienceInfo: z.array(ExperienceSchema).default([])})
 ];
-const stepTitles = ["Personal Information", "Summary"];
-const stepComponents = [PersonalInfo, Summary];
+const stepTitles = ["Personal Information", "Summary", "Experience"];
+const stepComponents = [PersonalInfo, Summary, Experience];
 
 const MulstistepForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -37,6 +40,7 @@ const MulstistepForm = () => {
       summaryInfo:{
         summary:""
       },
+      experienceInfo: [],
     },
     mode: "onChange",
   });
@@ -50,6 +54,9 @@ const MulstistepForm = () => {
         break;
         case 1:
           stepData = { summaryInfo: getValues("summaryInfo") };
+          break;
+        case 2:
+          stepData = { experience: getValues("experienceInfo") };
           break;
       default:
         stepData = {};
