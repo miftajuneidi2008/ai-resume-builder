@@ -3,6 +3,11 @@ import {
   PersonalInfoSchema,
   SummarySchema,
   ExperienceSchema,
+  EducationSchema,
+  languageSchema,
+  SkillSchema,
+  certificationSchema,
+  ProjectSchema,
 } from "@/schema/schema"; // Assuming schemas are in this file
 import { z } from "zod";
 
@@ -10,37 +15,42 @@ import { z } from "zod";
 type PersonalInfo = z.infer<typeof PersonalInfoSchema>;
 type SummaryInfo = z.infer<typeof SummarySchema>;
 type Experience = z.infer<typeof ExperienceSchema>;
-
+type Education = z.infer<typeof EducationSchema>;
+type Language = z.infer<typeof languageSchema>;
+type Skill = z.infer<typeof SkillSchema>;
+type Certificate = z.infer<typeof certificationSchema>;
+type Project = z.infer<typeof ProjectSchema>
 export interface ResumeState {
   personalInfo: PersonalInfo;
   summaryInfo: SummaryInfo;
-  experience: Experience[];
+  experienceInfo: Experience[];
+  educationInfo: Education[];
+  languageInfo: Language[];
+  skillInfo: Skill[];
+  certificationInfo: Certificate[];
+  projectInfo: Project[];
 }
 
-const initialState: ResumeState = {
-  personalInfo: {
-    fullName: "",
-    profession: "",
-    phone: "",
-    email: "",
-    address: "",
-    linkedIn: "",
-    website: "",
-  },
-  summaryInfo: {
-    summary: "",
-  },
-  experience: [
-    {
-      jobTitle: "",
-      company: "",
-      location: "",
-      startDate: new Date(),
-      endDate: new Date(),
-      description: "",
-    },
-  ],
-};
+export const initialState: ResumeState = {
+    personalInfo: {
+        fullName: "",
+        profession: "",
+        phone: "",
+        email: "",
+        address: "",
+        linkedIn: "",
+        website: "",
+      },
+      summaryInfo: {
+        summary: "",
+      },
+      experienceInfo: [],
+      educationInfo: [],
+      skillInfo: [],
+      languageInfo: [],
+      certificationInfo: [],
+      projectInfo: [],
+    };
 
 const resumeSlice = createSlice({
   name: "resume",
@@ -53,7 +63,7 @@ const resumeSlice = createSlice({
       state.summaryInfo = action.payload;
     },
     addExperience: (state, action: PayloadAction<Experience>) => {
-      state.experience.push(action.payload);
+      state.experienceInfo.push(action.payload);
     },
   },
 });

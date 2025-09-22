@@ -1,33 +1,34 @@
-import React from "react";
-import { fullSchematype } from "../MulstistepForm";
-import { useFieldArray, useFormContext } from "react-hook-form";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2 } from 'lucide-react';
+import React from 'react'
+import { fullSchematype } from '../MulstistepForm';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 
-const Experience = () => {
-  const {
+const Education = () => {
+ const {
     register,
     control,
     formState: { errors },
   } = useFormContext<fullSchematype>();
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "experienceInfo",
+    name: "educationInfo",
   });
 
   const addExperience = () => {
     append({
-      jobTitle: "",
-      company: "",
+      degreeTitle: "",
+      field: "",
+      institution: "",
       location: "",
-      startDate: new Date(),
-      endDate: new Date(),
-      description: "",
+      graduationDate: new Date(),
+      gpa: 0,
+  
     });
   };
 
   return (
     <div className="space-y-3">
-      <h2 className="mb-6 text-2xl font-bold text-gray-800">Experience</h2>
+      <h2 className="mb-6 text-2xl font-bold text-gray-800">Education</h2>
     
       {fields.map((field, index) => (
         <div key={field.id} className="bg-gray-50 p-6 rounded-lg border relative">
@@ -41,34 +42,51 @@ const Experience = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Job Title *
+                Degree Title *
               </label>
               <input
                 type="text"
-                {...register(`experienceInfo.${index}.jobTitle`)}
+                {...register(`educationInfo.${index}.degreeTitle`)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
                 placeholder="AJ Creative Designs"
               />
-              {errors.experienceInfo?.[index]?.jobTitle && (
+              {errors.educationInfo?.[index]?.degreeTitle && (
                 <p className="text-red-500 text-sm mt-1">
-                  {String(errors.experienceInfo[index]?.jobTitle?.message)}
+                  {String(errors.educationInfo[index]?.degreeTitle?.message)}
                 </p>
               )}
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Company *
+                Field of study *
               </label>
               <input
                 type="text"
-                {...register(`experienceInfo.${index}.company`)}
+                {...register(`educationInfo.${index}.field`)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
                 placeholder="shareholder"
               />
-              {errors.experienceInfo?.[index]?.company && (
+              {errors.educationInfo?.[index]?.field && (
                 <p className="text-red-500 text-sm mt-1">
-                  {String(errors.experienceInfo[index]?.company?.message)}
+                  {String(errors.educationInfo[index]?.field?.message)}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Institution *
+              </label>
+              <input
+                type="text"
+                {...register(`educationInfo.${index}.institution`)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
+                placeholder="100"
+              />
+              {errors.educationInfo?.[index]?.institution && (
+                <p className="text-red-500 text-sm mt-1">
+                  {String(errors.educationInfo[index]?.institution?.message)}
                 </p>
               )}
             </div>
@@ -79,60 +97,43 @@ const Experience = () => {
               </label>
               <input
                 type="text"
-                {...register(`experienceInfo.${index}.location`)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
-                placeholder="100"
-              />
-              {errors.experienceInfo?.[index]?.location && (
-                <p className="text-red-500 text-sm mt-1">
-                  {String(errors.experienceInfo[index]?.location?.message)}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Start Date *
-              </label>
-              <input
-                type="date"
-                {...register(`experienceInfo.${index}.startDate`)}
+                {...register(`educationInfo.${index}.location`)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
               />
-              {errors.experienceInfo?.[index]?.startDate && (
+              {errors.educationInfo?.[index]?.location && (
                 <p className="text-red-500 text-sm mt-1">
-                  {String(errors.experienceInfo[index]?.startDate?.message)}
+                  {String(errors.educationInfo[index]?.location?.message)}
                 </p>
               )}
             </div>
 
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                End Date *
+                Graduation Date *
               </label>
               <input
                 type="date"
-                {...register(`experienceInfo.${index}.endDate`)}
+                {...register(`educationInfo.${index}.graduationDate`)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
               />
-              {errors.experienceInfo?.[index]?.endDate && (
+              {errors.educationInfo?.[index]?.graduationDate && (
                 <p className="text-red-500 text-sm mt-1">
-                  {String(errors.experienceInfo[index]?.endDate?.message)}
+                  {String(errors.educationInfo[index]?.graduationDate?.message)}
                 </p>
               )}
             </div>
                <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Description *
+                GPA *
               </label>
               <input
-                type="text"
-                {...register(`experienceInfo.${index}.description`)}
+                type="number"
+                {...register(`educationInfo.${index}.gpa`)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
               />
-              {errors.experienceInfo?.[index]?.description && (
+              {errors.educationInfo?.[index]?.gpa && (
                 <p className="text-red-500 text-sm mt-1">
-                  {String(errors.experienceInfo[index]?.description?.message)}
+                  {String(errors.educationInfo[index]?.gpa?.message)}
                 </p>
               )}
             </div>
@@ -145,10 +146,11 @@ const Experience = () => {
           className="flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200 cursor-pointer"
         >
           <Plus size={16} />
-          <span>Add Experience</span>
+          <span>Add Education</span>
         </button>
     </div>
   );
 };
 
-export default Experience;
+
+export default Education
